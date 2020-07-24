@@ -1,4 +1,5 @@
 from time import sleep
+import i2c_lcd
 
 
 class RpiLCDHwd:
@@ -69,6 +70,8 @@ class RpiLCDHwd:
         for pin in self.pins_db:
             self.GPIO.setup(pin, GPIO.OUT)
 
+        self.lcd = i2c_lcd.lcd()
+
     def initDisplay(self):
         self.write4bits(0x33)  # initialization
         self.write4bits(0x32)  # initialization
@@ -88,29 +91,31 @@ class RpiLCDHwd:
         return self
 
     def write4bits(self, bits, char_mode=False):
-        """ Send command to LCD """
-        self.delayMicroseconds(1000)  # 1000 microsecond sleep
-        bits = bin(bits)[2:].zfill(8)
-        self.GPIO.output(self.pin_rs, char_mode)
-        for pin in self.pins_db:
-            self.GPIO.output(pin, False)
-
-        for i in range(4):
-            if bits[i] == "1":
-                self.GPIO.output(self.pins_db[::-1][i], True)
-
-        self.pulseEnable()
-
-        for pin in self.pins_db:
-            self.GPIO.output(pin, False)
-
-        for i in range(4, 8):
-            if bits[i] == "1":
-                self.GPIO.output(self.pins_db[::-1][i - 4], True)
-
-        self.pulseEnable()
-
+        self.lcd.lcd_write(bits, int(char_mode))
         return self
+        """ Send command to LCD """
+        # self.delayMicroseconds(1000)  # 1000 microsecond sleep
+        # bits = bin(bits)[2:].zfill(8)
+        # self.GPIO.output(self.pin_rs, char_mode)
+        # for pin in self.pins_db:
+        #     self.GPIO.output(pin, False)
+
+        # for i in range(4):
+        #     if bits[i] == "1":
+        #         self.GPIO.output(self.pins_db[::-1][i], True)
+
+        # self.pulseEnable()
+
+        # for pin in self.pins_db:
+        #     self.GPIO.output(pin, False)
+
+        # for i in range(4, 8):
+        #     if bits[i] == "1":
+        #         self.GPIO.output(self.pins_db[::-1][i - 4], True)
+
+        # self.pulseEnable()
+
+        # return self
 
     def delayMicroseconds(self, microseconds):
         seconds = microseconds / float(1000000)  # divide microseconds by 1 million for seconds
