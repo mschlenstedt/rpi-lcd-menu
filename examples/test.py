@@ -1,4 +1,4 @@
-from rpilcdmenu import *
+from rpilcdmenu.i2c_lcd_driver import i2c_lcd_driver
 from time import *
 
 mylcd = i2c_lcd_driver.lcd()
