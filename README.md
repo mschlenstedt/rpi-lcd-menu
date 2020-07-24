@@ -1,4 +1,4 @@
-# RPI LCD Menu - creating menu on 16x2 LCD with Raspberry PI
+# RPI LCD Menu - creating menu on 16x2 LCD i2c with Raspberry PI
 [![Build Status](https://travis-ci.org/Dublerq/rpi-lcd-menu.svg?branch=master)](https://travis-ci.org/Dublerq/rpi-lcd-menu)
 [![codecov](https://codecov.io/gh/Dublerq/rpi-lcd-menu/branch/master/graph/badge.svg)](https://codecov.io/gh/Dublerq/rpi-lcd-menu)
 
