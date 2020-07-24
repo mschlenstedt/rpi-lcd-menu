@@ -1,6 +1,6 @@
-import rpilcdmenu.i2c_lcd_driver as i2c_lcd_driver
+import i2c_lcd
 from time import *
 
-mylcd = i2c_lcd_driver.lcd()
+mylcd = i2c_lcd.lcd()
 
 mylcd.lcd_display_string("Hello World!", 1)
