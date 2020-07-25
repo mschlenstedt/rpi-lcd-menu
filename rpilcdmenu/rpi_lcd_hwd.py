@@ -46,30 +46,7 @@ class RpiLCDHwd:
     LCD_5x10DOTS = 0x04
     LCD_5x8DOTS = 0x00
 
-    def __init__(self, pin_rs=26, pin_e=19, pins_db=[13, 6, 5, 21], GPIO=None):
-        """
-        LCD GPIO configuration
-        """
-        if not GPIO:
-            import RPi.GPIO as GPIO
-            GPIO.setwarnings(False)
-
-        self.GPIO = GPIO
-        self.pin_rs = pin_rs
-        self.pin_e = pin_e
-        self.pins_db = pins_db
-
-        self.displaycontrol = None
-        self.displayfunction = None
-        self.displaymode = None
-
-        self.GPIO.setmode(GPIO.BCM)
-        self.GPIO.setup(self.pin_rs, GPIO.OUT)
-        self.GPIO.setup(self.pin_e, GPIO.OUT)
-
-        for pin in self.pins_db:
-            self.GPIO.setup(pin, GPIO.OUT)
-
+    def __init__(self):
         self.lcd = i2c_lcd.lcd()
 
     def initDisplay(self):
